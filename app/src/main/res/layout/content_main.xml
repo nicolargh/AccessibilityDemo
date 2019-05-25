@@ -19,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:importantForAccessibility="no"/>
+            android:importantForAccessibility="no" />
 
     <TextView
             android:id="@+id/welcomeTextView"
@@ -29,7 +29,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcomeImageView"
-            tools:text="Hello World!"
-    />
+            tools:text="Hello World!" />
 
 </android.support.constraint.ConstraintLayout>
