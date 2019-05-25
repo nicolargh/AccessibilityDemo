@@ -19,5 +19,6 @@
 
     <!-- Main View -->
     <string name="welcome_text">Welcome!</string>
+    <string name="snackbar_text">Snackbars will announce themselves"</string>
 
 </resources>

@@ -8,6 +8,10 @@ class MainViewStringProvider @Inject constructor(
     private val context: Context
 ) {
     fun getWelcomeText(): String {
-        return context.resources.getString(R.string.welcome_text)
+        return context.getString(R.string.welcome_text)
+    }
+
+    fun getSnackbarText(): String {
+        return context.getString(R.string.snackbar_text)
     }
 }

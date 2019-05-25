@@ -1,23 +1,24 @@
 package com.nicolag.accessibilitydemo.ui
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
+import android.support.design.widget.NavigationView
 import android.support.design.widget.Snackbar
 import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
-import android.view.MenuItem
 import android.support.v4.widget.DrawerLayout
-import android.support.design.widget.NavigationView
+import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.Menu
+import android.view.MenuItem
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
 import com.nicolag.accessibilitydemo.model.action.MainViewAction
+import com.nicolag.accessibilitydemo.model.action.MainViewClick
+import com.nicolag.accessibilitydemo.model.event.MainViewEvent
 import com.nicolag.accessibilitydemo.model.state.MainViewState
 import com.nicolag.accessibilitydemo.model.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import javax.inject.Inject
 
@@ -36,34 +37,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         injectActivity()
 
         setContentView(R.layout.activity_main)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
         val toggle = ActionBarDrawerToggle(
-            this, drawerLayout, toolbar,
+            this, drawer_layout, toolbar,
             R.string.navigation_drawer_open,
             R.string.navigation_drawer_close
         )
-        drawerLayout.addDrawerListener(toggle)
+        drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.setNavigationItemSelectedListener(this)
+        nav_view.setNavigationItemSelectedListener(this)
 
         observeViewModel()
         load()
     }
 
     override fun onBackPressed() {
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -116,10 +108,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         viewModel.state().observe(this, Observer<MainViewState> {
             it?.let { renderViewState(it) }
         })
+        viewModel.event().observe(this, Observer<MainViewEvent> {
+            it?.let { renderViewEvent(it) }
+        })
     }
 
     private fun renderViewState(state: MainViewState) {
         welcomeTextView.text = state.welcomeText
+        fab.setOnClickListener {
+            viewModel.dispatch(MainViewAction.Click(MainViewClick.Fab))
+        }
+    }
+
+    private fun renderViewEvent(event: MainViewEvent) {
+        when (event) {
+            is MainViewEvent.ShowSnackbar -> {
+                Snackbar.make(fab, event.string, event.length)
+                    .setAction("Action", null).show()
+            }
+        }
     }
 
     private fun load() {
