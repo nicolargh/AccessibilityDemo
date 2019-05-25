@@ -1,0 +1,20 @@
+# IntelliJ IDEA - ignore everything except code configs
+.idea
+*.ipr
+*.iws
+*.iml
+gen-external-apklibs
+*.properties
+
+# Gradle
+.gradle
+build
+reports/
+captures/
+
+# Other
+*.DS_Store
+tmp
+*.orig
+acme.dump
+ajcore.*.txt

@@ -1,5 +1,7 @@
-package com.nicolag.accessibilitydemo
+package com.nicolag.accessibilitydemo.ui
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
@@ -11,12 +13,28 @@ import android.support.design.widget.NavigationView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
+import com.nicolag.accessibilitydemo.R
+import com.nicolag.accessibilitydemo.injection.App
+import com.nicolag.accessibilitydemo.model.action.MainViewAction
+import com.nicolag.accessibilitydemo.model.state.MainViewState
+import com.nicolag.accessibilitydemo.model.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.content_main.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    @Inject
+    lateinit var viewModelFactory: MainViewModel.MainViewModelFactory
+
+    private val viewModel: MainViewModel by lazy {
+        viewModelFactory.getViewModel(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        injectActivity()
+
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -37,6 +55,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         navView.setNavigationItemSelectedListener(this)
+
+        observeViewModel()
+        load()
     }
 
     override fun onBackPressed() {
@@ -89,5 +110,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun observeViewModel() {
+        viewModel.state().observe(this, Observer<MainViewState> {
+            it?.let { renderViewState(it) }
+        })
+    }
+
+    private fun renderViewState(state: MainViewState) {
+        welcomeTextView.text = state.welcomeText
+    }
+
+    private fun load() {
+        viewModel.dispatch(MainViewAction.Load)
+    }
+
+    private fun injectActivity() {
+        App.appComponent.inject(this)
     }
 }
