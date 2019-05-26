@@ -13,6 +13,7 @@ import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
 import com.nicolag.accessibilitydemo.model.action.MainViewAction
 import com.nicolag.accessibilitydemo.model.action.MainViewClick
+import com.nicolag.accessibilitydemo.model.action.NavItem
 import com.nicolag.accessibilitydemo.model.event.MainViewEvent
 import com.nicolag.accessibilitydemo.model.state.MainViewState
 import com.nicolag.accessibilitydemo.model.viewmodel.MainViewModel
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+            closeDrawer()
         } else {
             super.onBackPressed()
         }
@@ -82,9 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> {
-                // Handle the camera action
-            }
+            R.id.nav_home -> viewModel.dispatch(MainViewAction.NavItemClick(NavItem.Home))
             R.id.nav_gallery -> {
 
             }
@@ -101,20 +100,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
         }
-        drawer_layout.closeDrawer(GravityCompat.START)
+        closeDrawer()
         return true
     }
 
-    /////////////////////////////////////////////////////////////////////////
-    //
-    /////////////////////////////////////////////////////////////////////////
+    private fun closeDrawer() {
+        drawer_layout.closeDrawer(GravityCompat.START)
+    }
 
     private fun observeViewModel() {
         viewModel.state().observe(this, Observer<MainViewState> { state ->
             state?.let { renderViewState(it) }
         })
-        viewModel.event().observe(this, Observer<MainViewEvent> { event ->
-            event?.let { renderViewEvent(it) }
+        viewModel.event().observe(this, Observer<MainViewEvent> {
+            renderViewEvent(it)
         })
     }
 
@@ -125,11 +124,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun renderViewEvent(event: MainViewEvent) {
+    private fun renderViewEvent(event: MainViewEvent?) {
         when (event) {
             is MainViewEvent.ShowSnackbar -> {
                 Snackbar.make(fab, event.string, event.length)
                     .setAction("Action", null).show()
+            }
+            is MainViewEvent.CloseNavDrawer -> {
+                closeDrawer()
             }
         }
     }

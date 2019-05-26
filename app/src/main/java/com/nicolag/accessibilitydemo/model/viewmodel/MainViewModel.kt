@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity
 import com.nicolag.accessibilitydemo.model.SingleLiveData
 import com.nicolag.accessibilitydemo.model.action.MainViewAction
 import com.nicolag.accessibilitydemo.model.action.MainViewClick
+import com.nicolag.accessibilitydemo.model.action.NavItem
 import com.nicolag.accessibilitydemo.model.event.MainViewEvent
 import com.nicolag.accessibilitydemo.model.state.MainViewState
 import com.nicolag.accessibilitydemo.provider.MainViewStringProvider
@@ -25,17 +26,18 @@ class MainViewModel(
         return liveEventData
     }
 
-
     fun dispatch(action: MainViewAction) {
         when (action) {
             is MainViewAction.Load -> load()
             is MainViewAction.Click -> handleClick(action.click)
+            is MainViewAction.NavItemClick -> handleNavItemClick(action.item)
         }
     }
 
     private fun load() {
         val state = MainViewState(
-            welcomeText = mainViewStringProvider.getWelcomeText()
+            welcomeText = mainViewStringProvider.getWelcomeText(),
+            navItem = NavItem.Home
         )
         postState(state)
     }
@@ -46,6 +48,12 @@ class MainViewModel(
                 string = mainViewStringProvider.getSnackbarText(),
                 length = Snackbar.LENGTH_LONG
             ))
+        }
+    }
+
+    private fun handleNavItemClick(item: NavItem) {
+        if (item == liveStateData.value?.navItem) {
+            liveEventData.postValue(MainViewEvent.CloseNavDrawer)
         }
     }
 
