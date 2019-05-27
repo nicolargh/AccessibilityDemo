@@ -4,7 +4,7 @@ import android.content.Context
 import com.nicolag.accessibilitydemo.R
 import javax.inject.Inject
 
-class MainViewStringProvider @Inject constructor(
+class HomeViewStringProvider @Inject constructor(
     private val context: Context
 ) {
     fun getWelcomeText(): String {

@@ -1,25 +1,26 @@
-package com.nicolag.accessibilitydemo.ui
+package com.nicolag.accessibilitydemo.ui.view
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
-import com.nicolag.accessibilitydemo.model.action.MainViewAction
-import com.nicolag.accessibilitydemo.model.action.MainViewClick
-import com.nicolag.accessibilitydemo.model.action.NavItem
 import com.nicolag.accessibilitydemo.model.event.MainViewEvent
 import com.nicolag.accessibilitydemo.model.state.MainViewState
 import com.nicolag.accessibilitydemo.model.viewmodel.MainViewModel
+import com.nicolag.accessibilitydemo.ui.action.MainViewAction
+import com.nicolag.accessibilitydemo.ui.action.NavItem
+import com.nicolag.accessibilitydemo.ui.view.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 /**
@@ -118,18 +119,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun renderViewState(state: MainViewState) {
-        welcomeTextView.text = state.welcomeText
-        fab.setOnClickListener {
-            viewModel.dispatch(MainViewAction.Click(MainViewClick.Fab))
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        if (supportFragmentManager.fragments.isNotEmpty()) {
+            fragmentTransaction.remove(supportFragmentManager.fragments.first())
         }
+
+        val fragment = when (state.navItem) {
+            is NavItem.Home -> HomeFragment()
+        }
+
+        fragmentTransaction.add(R.id.content_fragment, fragment, state.navItem.toString())
+        fragmentTransaction.commit()
     }
 
     private fun renderViewEvent(event: MainViewEvent?) {
         when (event) {
-            is MainViewEvent.ShowSnackbar -> {
-                Snackbar.make(fab, event.string, event.length)
-                    .setAction("Action", null).show()
-            }
             is MainViewEvent.CloseNavDrawer -> {
                 closeDrawer()
             }
@@ -137,10 +141,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun load() {
-        viewModel.dispatch(MainViewAction.Load)
+        viewModel.dispatch(MainViewAction.Load())
     }
 
     private fun injectActivity() {
         App.appComponent.inject(this)
+    }
+
+    companion object {
+        fun getFabView(fragment: Fragment): View = fragment.activity?.fab
+                ?: throw IllegalArgumentException("Fragment must be in this activity")
     }
 }

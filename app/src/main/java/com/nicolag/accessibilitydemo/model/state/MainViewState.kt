@@ -1,8 +1,7 @@
 package com.nicolag.accessibilitydemo.model.state
 
-import com.nicolag.accessibilitydemo.model.action.NavItem
+import com.nicolag.accessibilitydemo.ui.action.NavItem
 
 data class MainViewState(
-    val welcomeText: String,
     val navItem: NavItem
 )
