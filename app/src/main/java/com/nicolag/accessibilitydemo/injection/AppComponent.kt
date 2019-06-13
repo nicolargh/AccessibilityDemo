@@ -1,7 +1,7 @@
 package com.nicolag.accessibilitydemo.injection
 
-import com.nicolag.accessibilitydemo.ui.view.MainActivity
-import com.nicolag.accessibilitydemo.ui.view.home.HomeFragment
+import com.nicolag.accessibilitydemo.ui.view.HomeFragment
+import com.nicolag.accessibilitydemo.ui.MainActivity
 import dagger.Component
 
 @Component(modules = [(AppModule::class)])

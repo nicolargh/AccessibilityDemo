@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/app_bar_main"
-        tools:context="com.nicolag.accessibilitydemo.ui.view.MainActivity">
+        tools:context="com.nicolag.accessibilitydemo.ui.MainActivity">
 
     <ImageView
             android:id="@+id/welcomeImageView"
@@ -26,6 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:text="@string/welcome_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcomeImageView"

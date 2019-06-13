@@ -1,4 +1,4 @@
-package com.nicolag.accessibilitydemo.model
+package com.nicolag.accessibilitydemo.viewmodel
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData

@@ -1,9 +1,7 @@
 package com.nicolag.accessibilitydemo.injection
 
 import android.content.Context
-import com.nicolag.accessibilitydemo.model.viewmodel.MainViewModel
-import com.nicolag.accessibilitydemo.model.viewmodel.home.HomeViewModel
-import com.nicolag.accessibilitydemo.provider.HomeViewStringProvider
+import com.nicolag.accessibilitydemo.viewmodel.MainViewModel
 import dagger.Module
 import dagger.Provides
 
@@ -15,18 +13,4 @@ class AppModule(private val app: App) {
 
     @Provides
     fun mainViewModelFactory(): MainViewModel.MainViewModelFactory = MainViewModel.MainViewModelFactory()
-
-    @Provides
-    fun homeViewModelFactory(
-        homeViewStringProvider: HomeViewStringProvider
-    ): HomeViewModel.Factory = HomeViewModel.Factory(
-        homeViewStringProvider
-    )
-
-    @Provides
-    fun mainViewStringProvider(
-        context: Context
-    ): HomeViewStringProvider = HomeViewStringProvider(
-        context
-    )
 }

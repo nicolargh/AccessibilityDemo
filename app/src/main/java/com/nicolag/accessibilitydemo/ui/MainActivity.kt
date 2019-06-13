@@ -1,4 +1,4 @@
-package com.nicolag.accessibilitydemo.ui.view
+package com.nicolag.accessibilitydemo.ui
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
@@ -12,15 +12,10 @@ import android.view.MenuItem
 import android.view.View
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
-import com.nicolag.accessibilitydemo.model.event.MainViewEvent
-import com.nicolag.accessibilitydemo.model.state.MainViewState
-import com.nicolag.accessibilitydemo.model.viewmodel.MainViewModel
-import com.nicolag.accessibilitydemo.ui.action.MainViewAction
-import com.nicolag.accessibilitydemo.ui.action.NavItem
-import com.nicolag.accessibilitydemo.ui.view.home.HomeFragment
+import com.nicolag.accessibilitydemo.viewmodel.MainViewModel
+import com.nicolag.accessibilitydemo.ui.view.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 /**
@@ -84,10 +79,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_home -> viewModel.dispatch(MainViewAction.NavItemClick(NavItem.Home))
-            R.id.nav_gallery -> {
-
-            }
+            R.id.nav_home -> viewModel.dispatch(Action.NavItemClick(NavItem.Home))
+            R.id.nav_gallery -> {} //viewModel.dispatch(MainViewAction.NavItemClick(NavItem.Tabs))
             R.id.nav_slideshow -> {
 
             }
@@ -110,46 +103,47 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun observeViewModel() {
-        viewModel.state().observe(this, Observer<MainViewState> { state ->
+        viewModel.state().observe(this, Observer<MainViewModel.State> { state ->
             state?.let { renderViewState(it) }
         })
-        viewModel.event().observe(this, Observer<MainViewEvent> {
+        viewModel.event().observe(this, Observer<MainViewModel.Event> {
             renderViewEvent(it)
         })
     }
 
-    private fun renderViewState(state: MainViewState) {
+    private fun renderViewState(state: MainViewModel.State) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        if (supportFragmentManager.fragments.isNotEmpty()) {
-            fragmentTransaction.remove(supportFragmentManager.fragments.first())
-        }
-
         val fragment = when (state.navItem) {
             is NavItem.Home -> HomeFragment()
+            else -> HomeFragment()
         }
 
-        fragmentTransaction.add(R.id.content_fragment, fragment, state.navItem.toString())
+        fragmentTransaction.replace(R.id.content_fragment, fragment, state.navItem.toString())
         fragmentTransaction.commit()
     }
 
-    private fun renderViewEvent(event: MainViewEvent?) {
+    private fun renderViewEvent(event: MainViewModel.Event?) {
         when (event) {
-            is MainViewEvent.CloseNavDrawer -> {
+            is MainViewModel.Event.CloseNavDrawer -> {
                 closeDrawer()
             }
         }
     }
 
     private fun load() {
-        viewModel.dispatch(MainViewAction.Load())
+        viewModel.dispatch(Action.Load())
     }
 
     private fun injectActivity() {
         App.appComponent.inject(this)
     }
 
-    companion object {
-        fun getFabView(fragment: Fragment): View = fragment.activity?.fab
-                ?: throw IllegalArgumentException("Fragment must be in this activity")
+    sealed class Action {
+        class Load(val navItem: NavItem = NavItem.Home) : Action()
+        class NavItemClick(val item: NavItem) : Action()
+    }
+
+    sealed class NavItem {
+        object Home : NavItem()
     }
 }
