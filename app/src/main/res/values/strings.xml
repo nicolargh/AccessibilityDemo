@@ -11,15 +11,15 @@
 
     <!-- Navigation menu -->
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_tabs">Tabs</string>
 
     <!-- Main View -->
     <string name="welcome_text">Welcome!</string>
     <string name="snackbar_text">Snackbars will announce themselves"</string>
     <string name="new_message">Write a message</string>
+
+    <!-- Tabs View -->
+    <string name="tab_number">Tab %d</string>
+    <string name="tab_centre_text">Now on Tab %d</string>
 
 </resources>

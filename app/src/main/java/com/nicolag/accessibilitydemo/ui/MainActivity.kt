@@ -3,17 +3,16 @@ package com.nicolag.accessibilitydemo.ui
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.NavigationView
-import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
-import com.nicolag.accessibilitydemo.viewmodel.MainViewModel
 import com.nicolag.accessibilitydemo.ui.view.HomeFragment
+import com.nicolag.accessibilitydemo.ui.view.TabsFragment
+import com.nicolag.accessibilitydemo.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import javax.inject.Inject
@@ -80,19 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> viewModel.dispatch(Action.NavItemClick(NavItem.Home))
-            R.id.nav_gallery -> {} //viewModel.dispatch(MainViewAction.NavItemClick(NavItem.Tabs))
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_tools -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
+            R.id.nav_tabs -> viewModel.dispatch(Action.NavItemClick(NavItem.Tabs))
         }
         closeDrawer()
         return true
@@ -115,7 +102,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val fragment = when (state.navItem) {
             is NavItem.Home -> HomeFragment()
-            else -> HomeFragment()
+            is NavItem.Tabs -> TabsFragment()
         }
 
         fragmentTransaction.replace(R.id.content_fragment, fragment, state.navItem.toString())
@@ -145,5 +132,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     sealed class NavItem {
         object Home : NavItem()
+        object Tabs : NavItem()
     }
 }
