@@ -11,6 +11,7 @@ import android.view.MenuItem
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
 import com.nicolag.accessibilitydemo.ui.view.HomeFragment
+import com.nicolag.accessibilitydemo.ui.view.RatingBarFragment
 import com.nicolag.accessibilitydemo.ui.view.TabsFragment
 import com.nicolag.accessibilitydemo.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -48,7 +49,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
         observeViewModel()
-        load()
+
+        viewModel.dispatch(Action.Load)
     }
 
     override fun onBackPressed() {
@@ -80,6 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_home -> viewModel.dispatch(Action.NavItemClick(NavItem.Home))
             R.id.nav_tabs -> viewModel.dispatch(Action.NavItemClick(NavItem.Tabs))
+            R.id.nav_rating -> viewModel.dispatch(Action.NavItemClick(NavItem.RatingBar))
         }
         closeDrawer()
         return true
@@ -103,6 +106,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragment = when (state.navItem) {
             is NavItem.Home -> HomeFragment()
             is NavItem.Tabs -> TabsFragment()
+            is NavItem.RatingBar -> RatingBarFragment()
         }
 
         fragmentTransaction.replace(R.id.content_fragment, fragment, state.navItem.toString())
@@ -117,21 +121,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun load() {
-        viewModel.dispatch(Action.Load())
-    }
-
     private fun injectActivity() {
         App.appComponent.inject(this)
     }
 
     sealed class Action {
-        class Load(val navItem: NavItem = NavItem.Home) : Action()
+        object Load : Action()
         class NavItemClick(val item: NavItem) : Action()
     }
 
     sealed class NavItem {
         object Home : NavItem()
         object Tabs : NavItem()
+        object RatingBar : NavItem()
     }
 }
