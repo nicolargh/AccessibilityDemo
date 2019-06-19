@@ -13,5 +13,8 @@
         <item
                 android:id="@+id/nav_rating"
                 android:title="@string/menu_rating_bar"/>
+        <item
+                android:id="@+id/nav_list"
+                android:title="@string/menu_list_view"/>
     </group>
 </menu>

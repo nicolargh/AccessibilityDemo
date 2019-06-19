@@ -11,6 +11,7 @@ import android.view.MenuItem
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
 import com.nicolag.accessibilitydemo.ui.view.HomeFragment
+import com.nicolag.accessibilitydemo.ui.view.ListViewFragment
 import com.nicolag.accessibilitydemo.ui.view.RatingBarFragment
 import com.nicolag.accessibilitydemo.ui.view.TabsFragment
 import com.nicolag.accessibilitydemo.viewmodel.MainViewModel
@@ -83,6 +84,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home -> viewModel.dispatch(Action.NavItemClick(NavItem.Home))
             R.id.nav_tabs -> viewModel.dispatch(Action.NavItemClick(NavItem.Tabs))
             R.id.nav_rating -> viewModel.dispatch(Action.NavItemClick(NavItem.RatingBar))
+            R.id.nav_list -> viewModel.dispatch(Action.NavItemClick(NavItem.ListView))
         }
         closeDrawer()
         return true
@@ -107,6 +109,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             is NavItem.Home -> HomeFragment()
             is NavItem.Tabs -> TabsFragment()
             is NavItem.RatingBar -> RatingBarFragment()
+            is NavItem.ListView -> ListViewFragment()
         }
 
         fragmentTransaction.replace(R.id.content_fragment, fragment, state.navItem.toString())
@@ -134,5 +137,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         object Home : NavItem()
         object Tabs : NavItem()
         object RatingBar : NavItem()
+        object ListView : NavItem()
     }
 }

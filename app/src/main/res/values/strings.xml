@@ -13,6 +13,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_tabs">Tabs</string>
     <string name="menu_rating_bar">Rating Bar</string>
+    <string name="menu_list_view">List View</string>
 
     <!-- Main View -->
     <string name="welcome_text">Welcome!</string>
@@ -28,4 +29,7 @@
     <string name="rating_content_description">%1$s out of %2$d stars</string>
     <string name="rating_thanks">Thanks for rating %s stars!</string>
     <string name="rate_again">Rate again</string>
+
+    <!-- ListView View -->
+    <string name="item">Item %d</string>
 </resources>
