@@ -10,10 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.App
-import com.nicolag.accessibilitydemo.ui.view.HomeFragment
-import com.nicolag.accessibilitydemo.ui.view.ListViewFragment
-import com.nicolag.accessibilitydemo.ui.view.RatingBarFragment
-import com.nicolag.accessibilitydemo.ui.view.TabsFragment
+import com.nicolag.accessibilitydemo.ui.view.*
 import com.nicolag.accessibilitydemo.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -85,6 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_tabs -> viewModel.dispatch(Action.NavItemClick(NavItem.Tabs))
             R.id.nav_rating -> viewModel.dispatch(Action.NavItemClick(NavItem.RatingBar))
             R.id.nav_list -> viewModel.dispatch(Action.NavItemClick(NavItem.ListView))
+            R.id.nav_links -> viewModel.dispatch(Action.NavItemClick(NavItem.Links))
         }
         closeDrawer()
         return true
@@ -110,6 +108,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             is NavItem.Tabs -> TabsFragment()
             is NavItem.RatingBar -> RatingBarFragment()
             is NavItem.ListView -> ListViewFragment()
+            is NavItem.Links -> LinksFragment()
         }
 
         fragmentTransaction.replace(R.id.content_fragment, fragment, state.navItem.toString())
@@ -138,5 +137,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         object Tabs : NavItem()
         object RatingBar : NavItem()
         object ListView : NavItem()
+        object Links : NavItem()
     }
 }

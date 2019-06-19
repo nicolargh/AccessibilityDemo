@@ -1,10 +1,7 @@
 package com.nicolag.accessibilitydemo.injection
 
-import com.nicolag.accessibilitydemo.ui.view.HomeFragment
 import com.nicolag.accessibilitydemo.ui.MainActivity
-import com.nicolag.accessibilitydemo.ui.view.ListViewFragment
-import com.nicolag.accessibilitydemo.ui.view.RatingBarFragment
-import com.nicolag.accessibilitydemo.ui.view.TabsFragment
+import com.nicolag.accessibilitydemo.ui.view.*
 import dagger.Component
 
 @Component(modules = [(AppModule::class)])
@@ -14,4 +11,5 @@ interface AppComponent {
     fun inject(tabsFragment: TabsFragment)
     fun inject(ratingBarFragment: RatingBarFragment)
     fun inject(listViewFragment: ListViewFragment)
+    fun inject(linksFragment: LinksFragment)
 }

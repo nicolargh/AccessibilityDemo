@@ -14,6 +14,7 @@
     <string name="menu_tabs">Tabs</string>
     <string name="menu_rating_bar">Rating Bar</string>
     <string name="menu_list_view">List View</string>
+    <string name="menu_links">Links</string>
 
     <!-- Main View -->
     <string name="welcome_text">Welcome!</string>
