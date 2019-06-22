@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_search_cross"
+          android:title="@string/action_search_cross"
+          android:icon="@drawable/ic_search_cross"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_search_tick"
+          android:title="@string/action_search_tick"
+          android:icon="@drawable/ic_search_tick"
+          app:showAsAction="ifRoom"/>
+</menu>

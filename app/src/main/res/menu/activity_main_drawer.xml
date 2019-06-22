@@ -6,18 +6,21 @@
     <group android:checkableBehavior="single">
         <item
                 android:id="@+id/nav_home"
-                android:title="@string/menu_home"/>
+                android:title="@string/menu_home" />
         <item
                 android:id="@+id/nav_tabs"
-                android:title="@string/menu_tabs"/>
+                android:title="@string/menu_tabs" />
         <item
                 android:id="@+id/nav_rating"
-                android:title="@string/menu_rating_bar"/>
+                android:title="@string/menu_rating_bar" />
         <item
                 android:id="@+id/nav_list"
-                android:title="@string/menu_list_view"/>
+                android:title="@string/menu_list_view" />
         <item
                 android:id="@+id/nav_links"
-                android:title="@string/menu_links"/>
+                android:title="@string/menu_links" />
+        <item
+                android:id="@+id/nav_search"
+                android:title="@string/menu_search" />
     </group>
 </menu>

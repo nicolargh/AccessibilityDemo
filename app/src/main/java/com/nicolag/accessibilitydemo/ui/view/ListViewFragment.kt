@@ -17,7 +17,7 @@ class ListViewFragment : BaseFragment() {
 
     override fun setupView() {
         getFabView(this).setOnClickListener {
-            Toast.makeText(requireContext(), R.string.snackbar_text, Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), R.string.toast_text, Toast.LENGTH_LONG).show()
         }
         listView.adapter = ArrayAdapter<String>(
             requireContext(),
