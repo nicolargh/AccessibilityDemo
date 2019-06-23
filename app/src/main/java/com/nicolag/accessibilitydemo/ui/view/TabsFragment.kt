@@ -17,9 +17,13 @@ class TabsFragment : BaseFragment() {
     }
 
     override fun setupView() {
-        getFabView(this).setOnClickListener {
-            Toast.makeText(requireContext(), R.string.toast_text, Toast.LENGTH_LONG).show()
+        getFabView(this).apply {
+            setOnClickListener {
+                Toast.makeText(requireContext(), R.string.toast_text, Toast.LENGTH_LONG).show()
+            }
+            visibility = View.VISIBLE
         }
+
 
         (1..3).forEach {
             tabLayout.addTab(tabLayout.newTab().apply {
@@ -28,7 +32,7 @@ class TabsFragment : BaseFragment() {
             })
         }
 
-        setText(1)
+        textView.text = requireContext().getString(R.string.tab_centre_text, 1)
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) { }
@@ -36,13 +40,9 @@ class TabsFragment : BaseFragment() {
             override fun onTabUnselected(p0: TabLayout.Tab?) { }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                setText(tab?.tag as Int)
+                textView.text = requireContext().getString(R.string.tab_centre_text, tab?.tag as Int)
             }
         })
-    }
-
-    private fun setText(num: Int) {
-        textView.text = requireContext().getString(R.string.tab_centre_text, num)
     }
 
     override fun injectFragment(appComponent: AppComponent) {

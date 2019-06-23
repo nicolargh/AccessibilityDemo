@@ -49,6 +49,12 @@ class RatingBarFragment : BaseFragment() {
     }
 
     private fun inflateRating2() {
+        // text view will announce itself whenever its contents updates
+        // Polite means it may wait for something else to finish announcing first
+        // Use ACCESSIBILITY_LIVE_REGION_ASSERTIVE for immediate announcements
+        textView2.accessibilityLiveRegion = View.ACCESSIBILITY_LIVE_REGION_POLITE // can also be set in XML
+
+        ratingBar2.contentDescription = resources.getString(R.string.rating_content_description, "0", ratingBar2.numStars)
         ratingBar2.onRatingBarChangeListener = RatingBar.OnRatingBarChangeListener { _, rating, _ ->
             // if not using a keyboard or talkback, accept rating
             // otherwise, update the content description
@@ -62,7 +68,7 @@ class RatingBarFragment : BaseFragment() {
         }
 
         ratingBar2.setOnClickListener {
-            // if using a keyboard or talkback, accept rating on click
+            // if using a keyboard or talkback, accept rating on click/enter
             if (ratingBar2HasFocus() && ratingBar2.rating > 0) {
                 ratingBar2.isEnabled = false
                 textView2.text = requireContext().getString(R.string.rating_thanks, ratingBar2.rating.toString())

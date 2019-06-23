@@ -22,6 +22,7 @@ class OtherTextFragment : BaseFragment() {
     }
 
     override fun setupView() {
+        getFabView(this).visibility = View.GONE
         setupTextView1()
         setupTextView2()
         setupTextView3()
