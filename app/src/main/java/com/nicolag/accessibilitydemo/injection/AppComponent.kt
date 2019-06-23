@@ -13,4 +13,5 @@ interface AppComponent {
     fun inject(listViewFragment: ListViewFragment)
     fun inject(linksFragment: LinksFragment)
     fun inject(searchFragmentBackground: SearchFragment)
+    fun inject(otherTextFragment: OtherTextFragment)
 }

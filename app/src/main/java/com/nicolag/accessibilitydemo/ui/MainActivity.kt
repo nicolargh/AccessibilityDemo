@@ -65,8 +65,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_tabs -> viewModel.dispatch(Action.NavItemClick(NavItem.Tabs))
             R.id.nav_rating -> viewModel.dispatch(Action.NavItemClick(NavItem.RatingBar))
             R.id.nav_list -> viewModel.dispatch(Action.NavItemClick(NavItem.ListView))
-            R.id.nav_links -> viewModel.dispatch(Action.NavItemClick(NavItem.Links))
             R.id.nav_search -> viewModel.dispatch(Action.NavItemClick(NavItem.Search))
+            R.id.nav_links -> viewModel.dispatch(Action.NavItemClick(NavItem.Links))
+            R.id.nav_text -> viewModel.dispatch(Action.NavItemClick(NavItem.OtherText))
         }
         closeDrawer()
         return true
@@ -92,8 +93,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             is NavItem.Tabs -> TabsFragment()
             is NavItem.RatingBar -> RatingBarFragment()
             is NavItem.ListView -> ListViewFragment()
-            is NavItem.Links -> LinksFragment()
             is NavItem.Search -> SearchFragment()
+            is NavItem.Links -> LinksFragment()
+            is NavItem.OtherText -> OtherTextFragment()
         }
 
         fragmentTransaction.replace(R.id.content_fragment, fragment, state.navItem.toString())
@@ -122,7 +124,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         object Tabs : NavItem()
         object RatingBar : NavItem()
         object ListView : NavItem()
-        object Links : NavItem()
         object Search : NavItem()
+        object Links : NavItem()
+        object OtherText : NavItem()
     }
 }
