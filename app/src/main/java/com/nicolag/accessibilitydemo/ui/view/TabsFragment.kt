@@ -24,10 +24,16 @@ class TabsFragment : BaseFragment() {
             visibility = View.VISIBLE
         }
 
-
+        val tabContents = listOf(
+            getString(R.string.camera_tab) to resources.getDrawable(R.drawable.ic_menu_camera),
+            getString(R.string.gallery_tab) to resources.getDrawable(R.drawable.ic_menu_gallery),
+            getString(R.string.manage_tab) to resources.getDrawable(R.drawable.ic_menu_manage)
+        )
         (1..3).forEach {
             tabLayout.addTab(tabLayout.newTab().apply {
-                text = requireContext().getString(R.string.tab_number, it)
+                val tabContent = tabContents[it-1]
+                text = tabContent.first
+                contentDescription = getString(R.string.tab_item, tabContent.first)
                 tag = it
             })
         }
@@ -40,7 +46,9 @@ class TabsFragment : BaseFragment() {
             override fun onTabUnselected(p0: TabLayout.Tab?) { }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                textView.text = requireContext().getString(R.string.tab_centre_text, tab?.tag as Int)
+                val pos = tab?.tag as Int
+                textView.text = getString(R.string.tab_centre_text, pos)
+                mainImageView.setImageDrawable(tabContents[pos - 1].second)
             }
         })
     }

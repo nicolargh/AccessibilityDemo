@@ -27,8 +27,11 @@
     <string name="toast_content_description">Show a toast</string>
 
     <!-- Tabs View -->
-    <string name="tab_number">Tab %d</string>
+    <string name="tab_item">%s Tab</string>
     <string name="tab_centre_text">Now on Tab %d</string>
+    <string name="camera_tab">Camera</string>
+    <string name="gallery_tab">Gallery</string>
+    <string name="manage_tab">Manage</string>
 
     <!-- RatingBar View -->
     <string name="rate_me">Please rate me!</string>
