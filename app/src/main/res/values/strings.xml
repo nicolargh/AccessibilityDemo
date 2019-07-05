@@ -24,7 +24,7 @@
     <string name="welcome_text">Welcome!</string>
     <string name="welcome_subtitle_text">This app is a demo on how to (and sometimes how not to) handle certain situations in a way that makes them accessible to people using screen readers, like TalkBack</string>
     <string name="toast_text">Toasts will announce themselves"</string>
-    <string name="toast_content_description">Show a toast</string>
+    <string name="toast_content_description">TOAST 🥯 THAT 🍞 BREAD 🥖 BBY</string>
 
     <!-- Tabs View -->
     <string name="tab_item">%s Tab</string>
