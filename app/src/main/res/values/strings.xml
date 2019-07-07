@@ -13,6 +13,7 @@
 
     <!-- Navigation menu -->
     <string name="menu_home">Home</string>
+    <string name="menu_buttons">Buttons</string>
     <string name="menu_tabs">Tabs</string>
     <string name="menu_rating_bar">Rating Bar</string>
     <string name="menu_list_view">List View</string>
@@ -25,6 +26,10 @@
     <string name="welcome_subtitle_text">This app is a demo on how to (and sometimes how not to) handle certain situations in a way that makes them accessible to people using screen readers, like TalkBack</string>
     <string name="toast_text">Toasts will announce themselves"</string>
     <string name="toast_content_description">Show a toast</string>
+
+    <!-- Buttons View -->
+    <string name="tick">Mark correct</string>
+    <string name="cross">Mark incorrect</string>
 
     <!-- Tabs View -->
     <string name="tab_item">%s Tab</string>

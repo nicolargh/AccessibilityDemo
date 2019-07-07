@@ -62,6 +62,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_home -> viewModel.dispatch(Action.NavItemClick(NavItem.Home))
+            R.id.nav_buttons -> viewModel.dispatch(Action.NavItemClick(NavItem.Buttons))
             R.id.nav_tabs -> viewModel.dispatch(Action.NavItemClick(NavItem.Tabs))
             R.id.nav_rating -> viewModel.dispatch(Action.NavItemClick(NavItem.RatingBar))
             R.id.nav_list -> viewModel.dispatch(Action.NavItemClick(NavItem.ListView))
@@ -90,6 +91,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val fragment = when (state.navItem) {
             is NavItem.Home -> HomeFragment()
+            is NavItem.Buttons -> ButtonsFragment()
             is NavItem.Tabs -> TabsFragment()
             is NavItem.RatingBar -> RatingBarFragment()
             is NavItem.ListView -> ListViewFragment()
@@ -121,6 +123,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     sealed class NavItem {
         object Home : NavItem()
+        object Buttons : NavItem()
         object Tabs : NavItem()
         object RatingBar : NavItem()
         object ListView : NavItem()

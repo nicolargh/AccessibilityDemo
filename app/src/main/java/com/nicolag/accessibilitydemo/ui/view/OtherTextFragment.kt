@@ -4,17 +4,16 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.format.DateUtils
+import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.AppComponent
 import kotlinx.android.synthetic.main.other_text_fragment.*
-import android.text.Spannable
-import android.text.style.ImageSpan
-import android.text.SpannableString
-import android.text.format.DateUtils
-
 
 class OtherTextFragment : BaseFragment() {
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,7 +26,7 @@ class OtherTextFragment : BaseFragment() {
         setupTextView2()
         setupTextView3()
         setupTextView4()
-        setupTextView5()
+        setupAddButtons()
     }
 
     private fun setupTextView1() {
@@ -42,7 +41,7 @@ class OtherTextFragment : BaseFragment() {
         tick.setBounds(0, 0, tick.intrinsicWidth, tick.intrinsicHeight)
         val span = ImageSpan(tick, ImageSpan.ALIGN_BASELINE)
 
-        val text = "This text has some important information in an inline icon "
+        val text = "This text has some important information in an inline icon"
         val ss = SpannableString(text)
         ss.setSpan(span, text.length-1, text.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         textView2.text = ss
@@ -74,13 +73,17 @@ class OtherTextFragment : BaseFragment() {
         textView4.contentDescription = "$text$TIMESTAMP_SEPARATOR$timestampContentDescription"
     }
 
-    private fun setupTextView5() {
+    private fun setupAddButtons() {
         val text = "Some words, if in all caps, read like acronyms"
-        textView5.text = text
+        addText.text = text
 
-        button1.text = requireContext().getString(R.string.add_button).toUpperCase()
-        button2.text = requireContext().getString(R.string.add_button)
-        button2.isAllCaps = true // can also be set in xml
+        val addDescription = requireContext().getString(R.string.add_button)
+        add1.text = addDescription
+        add1.isAllCaps = true // can also be set in xml
+
+        add2.text = addDescription
+        add2.isAllCaps = true // can also be set in xml
+        add2.contentDescription = addDescription
     }
 
     override fun injectFragment(appComponent: AppComponent) {

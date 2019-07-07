@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.nicolag.accessibilitydemo.ui.MainActivity">
+
+    <TextView
+            android:id="@+id/tickCross1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:text="Tick Cross unlabelled Button" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
+
+        <ImageButton
+                android:id="@+id/tick1"
+                android:background="@drawable/ic_tick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/min_touch_target"
+                android:minWidth="@dimen/min_touch_target"
+                tools:ignore="ContentDescription" />
+
+        <ImageButton
+                android:id="@+id/cross1"
+                android:background="@drawable/ic_cross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/min_touch_target"
+                android:minWidth="@dimen/min_touch_target"
+                tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/tickCross2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:text="Tick Cross hint Button" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
+
+        <ImageButton
+                android:id="@+id/tick2"
+                android:background="@drawable/ic_tick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/min_touch_target"
+                android:minWidth="@dimen/min_touch_target"
+                tools:ignore="ContentDescription" />
+
+        <ImageButton
+                android:id="@+id/cross2"
+                android:background="@drawable/ic_cross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/min_touch_target"
+                android:minWidth="@dimen/min_touch_target"
+                tools:ignore="ContentDescription" />
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/tickCross3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            tools:text="Tick Cross labelled Button" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp">
+
+        <ImageButton
+                android:id="@+id/tick3"
+                android:background="@drawable/ic_tick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/min_touch_target"
+                android:minWidth="@dimen/min_touch_target"
+                tools:ignore="ContentDescription" />
+
+        <ImageButton
+                android:id="@+id/cross3"
+                android:background="@drawable/ic_cross"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/min_touch_target"
+                android:minWidth="@dimen/min_touch_target"
+                tools:ignore="ContentDescription" />
+    </LinearLayout>
+</LinearLayout>

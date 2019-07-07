@@ -38,13 +38,13 @@
             tools:text="Text view 4" />
 
     <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/addText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            tools:text="Text view 5" />
+            tools:text="A D D Button" />
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -53,16 +53,15 @@
             android:paddingEnd="12dp">
 
         <Button
-                android:id="@+id/button1"
+                android:id="@+id/add1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Button 1" />
 
         <Button
-                android:id="@+id/button2"
+                android:id="@+id/add2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Button 2" />
     </LinearLayout>
-
 </LinearLayout>

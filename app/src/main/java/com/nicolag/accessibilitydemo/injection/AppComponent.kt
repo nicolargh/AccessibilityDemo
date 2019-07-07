@@ -8,6 +8,7 @@ import dagger.Component
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(homeFragment: HomeFragment)
+    fun inject(buttonsFragment: ButtonsFragment)
     fun inject(tabsFragment: TabsFragment)
     fun inject(ratingBarFragment: RatingBarFragment)
     fun inject(listViewFragment: ListViewFragment)
