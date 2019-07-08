@@ -29,5 +29,8 @@
         <item
                 android:id="@+id/nav_text"
                 android:title="@string/menu_text" />
+        <item
+                android:id="@+id/nav_layout"
+                android:title="@string/menu_layout" />
     </group>
 </menu>

@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_search -> viewModel.dispatch(Action.NavItemClick(NavItem.Search))
             R.id.nav_links -> viewModel.dispatch(Action.NavItemClick(NavItem.Links))
             R.id.nav_text -> viewModel.dispatch(Action.NavItemClick(NavItem.OtherText))
+            R.id.nav_layout -> viewModel.dispatch(Action.NavItemClick(NavItem.Layout))
         }
         closeDrawer()
         return true
@@ -98,6 +99,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             is NavItem.Search -> SearchFragment()
             is NavItem.Links -> LinksFragment()
             is NavItem.OtherText -> OtherTextFragment()
+            is NavItem.Layout -> LayoutFragment()
         }
 
         fragmentTransaction.replace(R.id.content_fragment, fragment, state.navItem.toString())
@@ -130,5 +132,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         object Search : NavItem()
         object Links : NavItem()
         object OtherText : NavItem()
+        object Layout : NavItem()
     }
 }

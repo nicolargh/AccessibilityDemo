@@ -20,6 +20,7 @@
     <string name="menu_search">Search</string>
     <string name="menu_links">Links</string>
     <string name="menu_text">Other text</string>
+    <string name="menu_layout">Layout</string>
 
     <!-- Main View -->
     <string name="welcome_text">Welcome!</string>
@@ -58,4 +59,12 @@
     <string name="timestamp_mins_ago_long">posted %d minutes ago</string>
     <string name="timestamp_full">posted on %s</string>
     <string name="add_button">Add</string>
+
+    <!-- Layout Fragment -->
+    <string name="avatar_content_description">Your profile</string>
+    <string name="layout_likes">3 likes</string>
+    <string name="layout_timestamp">3 days ago</string>
+    <string name="heart_content_description">Heart</string>
+    <string name="comment_content_description">Comment</string>
+    <string name="share_content_description">Share</string>
 </resources>
