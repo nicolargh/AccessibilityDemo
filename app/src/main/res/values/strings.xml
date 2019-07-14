@@ -61,7 +61,7 @@
     <string name="add_button">Add</string>
 
     <!-- Layout Fragment -->
-    <string name="avatar_content_description">Your profile</string>
+    <string name="avatar_content_description">%s\'s profile</string>
     <string name="layout_likes">3 likes</string>
     <string name="layout_timestamp">3 days ago</string>
     <string name="heart_content_description">Heart</string>
