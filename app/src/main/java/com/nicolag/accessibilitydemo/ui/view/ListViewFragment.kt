@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.AppComponent
 import kotlinx.android.synthetic.main.list_view_fragment.*
+import android.widget.SimpleAdapter
 
 class ListViewFragment : BaseFragment() {
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,10 +23,19 @@ class ListViewFragment : BaseFragment() {
             visibility = View.VISIBLE
         }
 
-        listView.adapter = ArrayAdapter<String>(
+        val data = ArrayList<Map<String, String>>()
+        (1..100).forEach { num ->
+            data.add(HashMap<String, String>(2).also {
+                it["title"] = requireContext().getString(R.string.item, num)
+                it["subtitle"] = requireContext().getString(R.string.subtitle, num)
+            })
+        }
+        listView.adapter = SimpleAdapter(
             requireContext(),
-            android.R.layout.simple_list_item_1,
-            (1..50).map { requireContext().getString(R.string.item, it) }.toTypedArray()
+            data,
+            android.R.layout.simple_list_item_2,
+            arrayOf("title", "subtitle"),
+            intArrayOf(android.R.id.text1, android.R.id.text2)
         )
     }
 

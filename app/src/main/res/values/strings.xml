@@ -42,11 +42,13 @@
     <!-- RatingBar View -->
     <string name="rate_me">Please rate me!</string>
     <string name="rating_content_description">%1$s out of %2$d stars</string>
+    <string name="rating_bar_submit">submit rating</string>
     <string name="rating_thanks">Thanks for rating %s stars!</string>
     <string name="rate_again">Rate again</string>
 
     <!-- ListView View -->
     <string name="item">Item %d</string>
+    <string name="subtitle">Subtitle %d</string>
 
     <!-- Search View -->
     <string name="regular_text">Just some regular old text on a normal screen</string>

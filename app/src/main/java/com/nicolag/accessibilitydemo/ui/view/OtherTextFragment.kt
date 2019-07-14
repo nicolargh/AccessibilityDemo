@@ -41,7 +41,7 @@ class OtherTextFragment : BaseFragment() {
         tick.setBounds(0, 0, tick.intrinsicWidth, tick.intrinsicHeight)
         val span = ImageSpan(tick, ImageSpan.ALIGN_BASELINE)
 
-        val text = "This text has some important information in an inline icon"
+        val text = "This text has some important information in an inline icon "
         val ss = SpannableString(text)
         ss.setSpan(span, text.length-1, text.length, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         textView2.text = ss

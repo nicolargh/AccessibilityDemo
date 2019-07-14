@@ -1,8 +1,6 @@
 package com.nicolag.accessibilitydemo.ui.view
 
-import android.os.Build
 import android.os.Bundle
-import android.support.v7.widget.TooltipCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -9,6 +9,10 @@ import android.widget.RatingBar
 import com.nicolag.accessibilitydemo.R
 import com.nicolag.accessibilitydemo.injection.AppComponent
 import kotlinx.android.synthetic.main.rating_bar_fragment.*
+import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat
+import android.support.v4.view.accessibility.AccessibilityNodeInfoCompat.AccessibilityActionCompat
+import android.support.v4.view.AccessibilityDelegateCompat
+import android.support.v4.view.ViewCompat
 
 class RatingBarFragment : BaseFragment() {
     override fun createView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,6 +70,20 @@ class RatingBarFragment : BaseFragment() {
             ratingBar2.contentDescription =
                 resources.getString(R.string.rating_content_description, rating.toString(), ratingBar2.numStars)
         }
+
+        // As we're overwriting a lot of behavior here, it's probably useful to the user to explain in greater detail
+        // what clicking will do
+        ViewCompat.setAccessibilityDelegate(ratingBar2, object : AccessibilityDelegateCompat() {
+            override fun onInitializeAccessibilityNodeInfo(view: View, info: AccessibilityNodeInfoCompat) {
+                super.onInitializeAccessibilityNodeInfo(view, info)
+                // replace the typical 'activate' in the 'double-tap to activate' instruction with our own verb.
+                val description = view.resources.getText(R.string.rating_bar_submit)
+                val customClick = AccessibilityActionCompat(
+                    AccessibilityNodeInfoCompat.ACTION_CLICK, description
+                )
+                info.addAction(customClick)
+            }
+        })
 
         ratingBar2.setOnClickListener {
             // if using a keyboard or talkback, accept rating on click/enter
