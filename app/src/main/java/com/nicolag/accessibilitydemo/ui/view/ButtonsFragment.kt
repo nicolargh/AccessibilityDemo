@@ -22,38 +22,20 @@ class ButtonsFragment : BaseFragment() {
     }
 
     private fun setupTickCross1() {
-        val text = "These buttons don't have any content descriptions or tool tips."
+        val text = "These buttons don't have any content descriptions."
         tickCross1.text = text
     }
 
     private fun setupTickCross2() {
-        val text = "These buttons have no content descriptions, but have tool tips."
+        val text = "These buttons have no content descriptions, and are wrapped in another layout."
         tickCross2.text = text
-        addHints(tick2, cross2)
     }
 
     private fun setupTickCross3() {
-        val text = "These buttons have both content descriptions and tool tips."
+        val text = "These buttons have content descriptions."
         tickCross3.text = text
-        addHints(tick3, cross3)
         tick3.contentDescription = requireContext().getString(R.string.tick)
         cross3.contentDescription = requireContext().getString(R.string.cross)
-    }
-
-    private fun addHints(tick: View, cross: View) {
-        val tickToolTip = requireContext().getString(R.string.tick)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            tick.tooltipText = tickToolTip
-        } else {
-            TooltipCompat.setTooltipText(tick, tickToolTip)
-        }
-
-        val crossToolTip = requireContext().getString(R.string.cross)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            cross.tooltipText = crossToolTip
-        } else {
-            TooltipCompat.setTooltipText(cross, crossToolTip)
-        }
     }
 
     override fun injectFragment(appComponent: AppComponent) {
